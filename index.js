@@ -7,7 +7,8 @@ import taskRoutes from './routes/taskRoutes.js';
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5000; // Render injects its own PORT
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 
 // Middleware
 app.use(express.json());
@@ -27,6 +28,5 @@ mongoose
   .connect(process.env.MONGODB_URI)
   .then(() => {
     console.log('Connected to MongoDB Atlas');
-    app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
   })
   .catch((err) => console.error('Error connecting to MongoDB:', err));
